@@ -1,0 +1,17 @@
+spring:
+  # ===============================
+  # = DATASOURCE
+  # ===============================
+  datasource:
+    url: jdbc:sqlite:memory:book_catalog
+    username: sa
+    password: sa
+    driverClassName: org.sqlite.JDBC
+  # ===============================
+  # = JPA / HIBERNATE
+  # ===============================
+  jpa:
+    database-platform: org.hibernate.dialect.SQLiteDialect
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

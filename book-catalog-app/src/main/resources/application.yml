@@ -1,0 +1,88 @@
+application:
+  title: backoffice-app
+  version: 1.0.0
+spring:
+  application:
+    name: ${APP_NAME}
+  # ===============================
+  # = VIRTUAL THREADS
+  # ===============================
+  threads:
+    virtual:
+      enabled: true
+  # ===============================
+  # = DATASOURCE
+  # ===============================
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    driverClassName: org.postgresql.Driver
+  # ===============================
+  # = LIQUIBASE
+  # ===============================
+  liquibase:
+    enabled: true
+    default-schema: ${DB_SCHEMA}
+    change-log: classpath:db/changelog/db.changelog.yml
+  # ===============================
+  # = JPA / HIBERNATE
+  # ===============================
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+        use_sql_comments: true
+        default_schema: ${DB_SCHEMA}
+# ===============================
+# = ACTUATOR
+# ===============================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+# ===============================
+# = SERVER
+# ===============================
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /service
+# ===============================
+# = LOGGING
+# ===============================
+logging:
+  level:
+    root: info
+    sql: info
+    web: info
+    dev.vlaship.backoffice: debug
+# ===============================
+# = OAuth2
+# ===============================
+oauth2:
+  rsa:
+    private-key: classpath:certs/private-key.pem
+    public-key: classpath:certs/public-key.pem
+  expiration: ${JWT_TTL_SECONDS:PT1H}
+# ===============================
+# = Clients
+# ===============================
+client:
+  base-url: http://localhost:8080/service
+  path: /api
+  apache-http-client:
+    connection-timeout: 10s
+    socket-timeout: 60s
+    pooling:
+      max-total: 200
+      default-max-per-route: 100
+    retry:
+      count: 3
+      interval: 10

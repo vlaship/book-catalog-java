@@ -1,0 +1,16 @@
+HELP.md
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+.vscode/
+*.db
+bin/
+.idea/
+.fleet/
+*.iws
+*.iml
+*.ipr
+out/
+*private.env*
+.env
+*.log

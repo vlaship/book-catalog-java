@@ -1,0 +1,791 @@
+openapi: 3.0.3
+
+info:
+  title: Book Catalog API
+  description: This is a sample server Book Catalog server.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8888/book-catalog
+    description: Local server
+
+tags:
+  - name: Auth
+  - name: Book
+  - name: Author
+
+paths:
+  /v1/auth/signup:
+    post:
+      tags:
+        - Auth
+      summary: sign up
+      operationId: signup
+      requestBody:
+        $ref: '#/components/requestBodies/SignupReq'
+      responses:
+        201:
+          description: Signup
+          content: { }
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+  /v1/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: login
+      operationId: login
+      requestBody:
+        $ref: '#/components/requestBodies/LoginReq'
+      responses:
+        200:
+          $ref: '#/components/responses/LoginResp'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+  /v1/book:
+    get:
+      tags:
+        - Book
+      summary: get books
+      operationId: getBooks
+      x-spring-paginated: true
+      responses:
+        200:
+          $ref: '#/components/responses/GetBooksResp'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+    post:
+      tags:
+        - Book
+      summary: create book
+      operationId: createBook
+      requestBody:
+        $ref: '#/components/requestBodies/CreateBookReq'
+      responses:
+        201:
+          $ref: '#/components/responses/CreateBookResp'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+  /v1/book/{bookId}:
+    get:
+      tags:
+        - Book
+      summary: get book
+      operationId: getBook
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          $ref: '#/components/responses/GetBookResp'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+    patch:
+      tags:
+        - Book
+      summary: update book
+      operationId: updateBook
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateBookReq'
+      responses:
+        200:
+          $ref: '#/components/responses/UpdateBookResp'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+    delete:
+      tags:
+        - Book
+      summary: delete book
+      operationId: deleteBook
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Delete Book
+          content: { }
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+  /v1/author:
+    get:
+      tags:
+        - Author
+      summary: get authors
+      operationId: getAuthors
+      x-spring-paginated: true
+      responses:
+        200:
+          $ref: '#/components/responses/GetAuthorsResp'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+    post:
+      tags:
+        - Author
+      summary: create author
+      operationId: createAuthor
+      requestBody:
+        $ref: '#/components/requestBodies/CreateAuthorReq'
+      responses:
+        201:
+          $ref: '#/components/responses/CreateAuthorResp'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+  /v1/author/{authorId}:
+    get:
+      tags:
+        - Author
+      summary: get author
+      operationId: getAuthor
+      parameters:
+        - name: authorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          $ref: '#/components/responses/GetAuthorResp'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+    patch:
+      tags:
+        - Author
+      summary: update author
+      operationId: updateAuthor
+      parameters:
+        - name: authorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateAuthorReq'
+      responses:
+        200:
+          $ref: '#/components/responses/UpdateAuthorResp'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+    delete:
+      tags:
+        - Author
+      summary: delete author
+      operationId: deleteAuthor
+      parameters:
+        - name: authorId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Delete Author
+          content: { }
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        401:
+          $ref: '#/components/responses/ErrorResp'
+        403:
+          $ref: '#/components/responses/ErrorResp'
+        404:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+
+components:
+  #############################################
+  ## Request Bodies
+  #############################################
+  requestBodies:
+    SignupReq:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SignupRequest'
+    LoginReq:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginRequest'
+    CreateBookReq:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateBookRequest'
+    UpdateBookReq:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateBookRequest'
+    CreateAuthorReq:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateAuthorRequest'
+    UpdateAuthorReq:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateAuthorRequest'
+
+  #############################################
+  ## Responses
+  #############################################
+  responses:
+    LoginResp:
+      description: Login
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginResponse'
+    GetBookResp:
+      description: Get Book
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BookDto'
+    GetBooksResp:
+      description: Get Books
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BookPage'
+    CreateBookResp:
+      description: Create Book
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateBookDto'
+    UpdateBookResp:
+      description: Update Book
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BookDto'
+    GetAuthorResp:
+      description: Get Author
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthorDto'
+    GetAuthorsResp:
+      description: Get Authors
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthorPage'
+    CreateAuthorResp:
+      description: Create Author
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateAuthorDto'
+    UpdateAuthorResp:
+      description: Update Author
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthorDto'
+    ErrorResp:
+      description: Error Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
+  #############################################
+  ## Schemas
+  #############################################
+  schemas:
+    # Spring
+    ProblemDetail:
+      type: object
+
+    # DTO Auth
+    SignupRequest:
+      required:
+        - password
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 7
+          maxLength: 50
+          description: Username / Email
+          example: user@example.com
+        password:
+          type: string
+          minLength: 12
+          description: Password
+
+    LoginRequest:
+      required:
+        - password
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 7
+          maxLength: 50
+          description: Username / Email
+          example: user@example.com
+        password:
+          type: string
+          minLength: 12
+          description: Password
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT Token
+
+    # DTO Book
+    BookDto:
+      type: object
+      properties:
+        bookId:
+          type: integer
+          format: int64
+          description: Book ID
+          example: 1
+        title:
+          type: string
+          description: Book Title
+          example: The Lord of the Rings
+        description:
+          type: string
+          description: Book Description
+        published:
+          type: string
+          format: date
+          description: Publication Date
+          example: 1954-07-29
+        isbn:
+          type: string
+          description: ISBN
+          example: 978-3-16-148410-0
+        price:
+          type: number
+          description: Price
+          example: 19.99
+        authorId:
+          type: integer
+          format: int64
+          description: Author ID
+          example: 1
+        authorName:
+          type: string
+          description: Author Name
+          example: J.R.R. Tolkien
+
+    # DTO Book
+    BookPage:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookListDto'
+        totalElements:
+          type: integer
+          description: Total number of elements
+        totalPages:
+          type: integer
+          description: Total number of pages
+        size:
+          type: integer
+          description: Number of elements per page
+        number:
+          type: integer
+          description: Current page number
+        numberOfElements:
+          type: integer
+          description: Number of elements in the current page
+        first:
+          type: boolean
+          description: Is this the first page?
+        last:
+          type: boolean
+          description: Is this the last page?
+        sort:
+          type: string
+          description: Sorting criteria
+
+    BookListDto:
+      type: object
+      properties:
+        bookId:
+          type: integer
+          format: int64
+          description: Book ID
+          example: 1
+        title:
+          type: string
+          description: Book Title
+          example: The Lord of the Rings
+        price:
+          type: number
+          description: Price
+          example: 19.99
+        authorId:
+          type: integer
+          format: int64
+          description: Author ID
+          example: 1
+        authorName:
+          type: string
+          description: Author Name
+          example: J.R.R. Tolkien
+
+    CreateBookRequest:
+      required:
+        - title
+        - description
+        - isbn
+        - publicationDate
+        - authorId
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Book Title
+          example: The Lord of the Rings
+        description:
+          type: string
+          minLength: 0
+          maxLength: 255
+          description: Book Description
+        published:
+          type: string
+          format: date
+          description: Publication Date
+          example: 1954-07-29
+        isbn:
+          type: string
+          minLength: 0
+          maxLength: 25
+          description: ISBN
+          example: 978-3-16-148410-0
+        price:
+          type: number
+          description: Price
+          example: 19.99
+        authorId:
+          type: integer
+          format: int64
+          description: Author ID
+          example: 1
+
+    CreateBookDto:
+      type: object
+      properties:
+        bookId:
+          type: integer
+          format: int64
+          description: Book ID
+          example: 1
+
+    UpdateBookRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Book Title
+          example: The Lord of the Rings
+        description:
+          type: string
+          minLength: 0
+          maxLength: 255
+          description: Book Description
+        published:
+          type: string
+          format: date
+          description: Publication Date
+          example: 1954-07-29
+        isbn:
+          type: string
+          minLength: 0
+          maxLength: 25
+          description: ISBN
+          example: 978-3-16-148410-0
+        price:
+          type: number
+          description: Price
+          example: 19.99
+        authorId:
+          type: integer
+          format: int64
+          description: Author ID
+          example: 1
+
+    # DTO Author
+    AuthorPage:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorListDto'
+        totalElements:
+          type: integer
+          description: Total number of elements
+        totalPages:
+          type: integer
+          description: Total number of pages
+        size:
+          type: integer
+          description: Number of elements per page
+        number:
+          type: integer
+          description: Current page number
+        numberOfElements:
+          type: integer
+          description: Number of elements in the current page
+        first:
+          type: boolean
+          description: Is this the first page?
+        last:
+          type: boolean
+          description: Is this the last page?
+        sort:
+          type: string
+          description: Sorting criteria
+
+    AuthorDto:
+      type: object
+      properties:
+        authorId:
+          type: integer
+          format: int64
+          description: Author ID
+          example: 1
+        firstName:
+          type: string
+          description: First Name
+          example: J.R.R.
+        lastName:
+          type: string
+          description: Last Name
+          example: Tolkien
+        dateOfBirth:
+          type: string
+          format: date
+          description: Date of Birth
+          example: 1892-01-03
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookListDto'
+
+    AuthorBookDto:
+      type: object
+      properties:
+        bookId:
+          type: integer
+          format: int64
+          description: Book ID
+          example: 1
+        title:
+          type: string
+          description: Book Title
+          example: The Lord of the Rings
+
+    AuthorListDto:
+      type: object
+      properties:
+        authorId:
+          type: integer
+          format: int64
+          description: Author ID
+          example: 1
+        firstName:
+          type: string
+          description: First Name
+          example: J.R.R.
+        lastName:
+          type: string
+          description: Last Name
+          example: Tolkien
+
+    CreateAuthorRequest:
+      required:
+        - firstName
+        - lastName
+        - dateOfBirth
+      type: object
+      properties:
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: First Name
+          example: J.R.R.
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: Last Name
+          example: Tolkien
+        dateOfBirth:
+          type: string
+          format: date
+          description: Date of Birth
+          example: 1892-01-03
+
+    CreateAuthorDto:
+      type: object
+      properties:
+        authorId:
+          type: integer
+          format: int64
+          description: Author ID
+          example: 1
+
+    UpdateAuthorRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: First Name
+          example: J.R.R.
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: Last Name
+          example: Tolkien
+        dateOfBirth:
+          type: string
+          format: date
+          description: Date of Birth
+          example: 1892-01-03
