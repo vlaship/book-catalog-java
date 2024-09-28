@@ -18,7 +18,7 @@ public class LoggingAspect {
 
     private static final String LOG = "log";
 
-    @Before("execution(public * dev.vlaship.book.catalog.facade.*.*(..)) || execution(public * dev.vlaship.book.catalog.service.*.*(..))")
+    @Before("execution(public * dev.vlaship.book.catalog.service.*.*(..))")
     public void logging(final JoinPoint pjp) throws Throwable {
         var log = getLogger(pjp);
         if (log != null) {

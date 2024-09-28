@@ -16,12 +16,13 @@ spotless {
 
     java {
         target("src/*/java/**/*.java", "src/*/test/**/*.java")
+        eclipse("4.33").configFile("../spotless.xml")
+        indentWithTabs(2)
+        indentWithSpaces(4)
         toggleOffOn()
-        //googleJavaFormat()
-//        cleanthat()
         trimTrailingWhitespace()
-        indentWithSpaces()
         endWithNewline()
         removeUnusedImports()
+//        cleanthat()
     }
 }
