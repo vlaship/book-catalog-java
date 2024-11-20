@@ -1,12 +1,12 @@
 package dev.vlaship.book.catalog.repository;
 
 import dev.vlaship.book.catalog.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
     @NonNull
     Optional<User> findByName(@NonNull String name);

@@ -5,7 +5,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -17,7 +17,7 @@ public class TracePropagationClientHttpRequestInterceptor implements ClientHttpR
     @Override
     public ClientHttpResponse intercept(
             HttpRequest request,
-            @NonNull byte[] body,
+            byte @NonNull [] body,
             ClientHttpRequestExecution execution
     ) throws IOException {
         log.debug("TracePropagationClientHttpRequest Interceptor: modifying before sending request");

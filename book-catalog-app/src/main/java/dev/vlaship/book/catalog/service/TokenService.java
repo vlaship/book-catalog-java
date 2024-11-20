@@ -2,7 +2,7 @@ package dev.vlaship.book.catalog.service;
 
 import dev.vlaship.book.catalog.security.OAuth2Properties;
 import lombok.RequiredArgsConstructor;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;

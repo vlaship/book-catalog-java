@@ -1,17 +1,15 @@
 package dev.vlaship.book.catalog.security;
 
 import dev.vlaship.book.catalog.model.User;
-import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-@AllArgsConstructor
-public class AuthPrinciple implements UserDetails {
-
-    private final User user;
+public record AuthPrinciple(
+    User user
+) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -20,12 +18,12 @@ public class AuthPrinciple implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return user.password();
     }
 
     @Override
     public String getUsername() {
-        return user.getName();
+        return user.name();
     }
 
     @Override
@@ -47,5 +45,4 @@ public class AuthPrinciple implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }

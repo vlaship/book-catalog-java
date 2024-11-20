@@ -6,7 +6,7 @@ import dev.vlaship.book.catalog.dto.SignupRequest;
 import dev.vlaship.book.catalog.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +25,8 @@ public class UserService {
 
     @NonNull
     public LoginResponse login(@NonNull LoginRequest request) {
-        var auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        var token = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
+        var auth = authenticationManager.authenticate(token);
         var jwt = tokenService.generateToken(auth.getName());
         return new LoginResponse().token(jwt.getTokenValue());
     }
@@ -34,9 +35,9 @@ public class UserService {
         var encoded = passwordEncoder.encode(request.getPassword());
         request.setPassword(encoded);
         var user = User.builder()
-                .name(request.getUsername())
-                .password(encoded)
-                .build();
+            .name(request.getUsername())
+            .password(encoded)
+            .build();
         userRepository.save(user);
     }
 }

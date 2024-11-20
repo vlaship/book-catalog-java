@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -34,6 +34,7 @@ public class AuthorService {
 
     @NonNull
     public AuthorDto getAuthor(long authorId) {
+        log.debug("gettingAuthor({})", authorId);
         var author = find(authorId);
         return mapper.map(author);
     }
@@ -55,6 +56,6 @@ public class AuthorService {
 
     private Author find(long authorId) {
         return repository.findById(authorId)
-                .orElseThrow(() -> new EntityNotFoundException("author", authorId));
+            .orElseThrow(() -> new EntityNotFoundException("author", authorId));
     }
 }

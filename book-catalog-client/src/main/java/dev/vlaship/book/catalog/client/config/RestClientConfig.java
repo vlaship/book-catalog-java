@@ -13,6 +13,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
@@ -54,11 +55,11 @@ public class RestClientConfig {
                 .setRetryStrategy(retryStrategy)
                 .build();
 
-        return new HttpComponentsClientHttpRequestFactory(client);
+        return new BufferingClientHttpRequestFactory(new HttpComponentsClientHttpRequestFactory(client));
     }
 
-    @Bean("clientRestTemplate")
-    public RestClient restClient(
+    @Bean("clientRestClient")
+    public RestClient clientRestClient(
             @Qualifier("clientRequestFactory") ClientHttpRequestFactory clientHttpRequestFactory,
             RestClientProperties clientProperties
     ) {

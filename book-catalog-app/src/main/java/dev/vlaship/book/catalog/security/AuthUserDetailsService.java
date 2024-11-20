@@ -2,6 +2,7 @@ package dev.vlaship.book.catalog.security;
 
 import lombok.RequiredArgsConstructor;
 import dev.vlaship.book.catalog.repository.UserRepository;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,9 +14,11 @@ public class AuthUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+    @NonNull
     @Override
-    public UserDetails loadUserByUsername(final String name) {
-        var user = userRepository.findByName(name).orElseThrow(() -> new UsernameNotFoundException(name));
+    public UserDetails loadUserByUsername(@NonNull String name) {
+        var user = userRepository.findByName(name)
+            .orElseThrow(() -> new UsernameNotFoundException(name));
         return new AuthPrinciple(user);
     }
 }

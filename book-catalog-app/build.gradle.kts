@@ -18,6 +18,9 @@ dependencies {
     // avoid warnings
     compileOnly(libs.findbugs)
 
+    // annotations
+    implementation(libs.jspecify)
+
     // security
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
@@ -38,6 +41,7 @@ dependencies {
     implementation(libs.preLiquibase)
     implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 
     // cache
     implementation("org.springframework.boot:spring-boot-starter-cache")

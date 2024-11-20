@@ -1,9 +1,10 @@
 [versions]
 springdocWebVersion = "2.6.0"
 springdocDataVersion = "1.8.0"
-springBootVersion = "3.3.4"
+springBootVersion = "3.3.5"
 springDepManVersion = "1.1.6"
-kotlinGradlePluginVersion = "2.1.0-Beta1"
+springCloudVersion = "2023.0.3"
+kotlinGradlePluginVersion = "2.1.0-RC2"
 graalvmGradlePluginVersion = "0.10.2"
 gitPropertiesGradlePluginVersion = "2.4.1"
 preLiquibaseVersion = "1.5.1"
@@ -13,8 +14,11 @@ swaggerAnnotationsVersion = "2.2.23"
 openapiGeneratorVersion = "7.5.0" #"7.8.0"
 jacksonDatabindNullableVersion = "0.2.6"
 spotlessPluginVersion = "6.25.0"
+jspecifyVersion = "1.0.0"
 
 [libraries]
+jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecifyVersion" }
+spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudVersion" }
 jackson-databind-nullable = { module = "org.openapitools:jackson-databind-nullable", version.ref = "jacksonDatabindNullableVersion" }
 swagger-annotations = { module = "io.swagger.core.v3:swagger-annotations", version.ref = "swaggerAnnotationsVersion" }
 mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapstructVersion" }
@@ -23,6 +27,7 @@ findbugs = { module = "com.google.code.findbugs:jsr305", version.ref = "findbugs
 preLiquibase = { module = "net.lbruun.springboot:preliquibase-spring-boot-starter", version.ref = "preLiquibaseVersion" }
 springdocWeb = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdocWebVersion" }
 springdocData = { module = "org.springdoc:springdoc-openapi-data-rest", version.ref = "springdocDataVersion" }
+
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePluginVersion" }
 graalvm-gradle-plugin = { module = "org.graalvm.buildtools.native:org.graalvm.buildtools.native.gradle.plugin", version.ref = "graalvmGradlePluginVersion" }
 spring-boot-gradle-plugin = { module = "org.springframework.boot:spring-boot-gradle-plugin", version.ref = "springBootVersion" }
